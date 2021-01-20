@@ -23,6 +23,7 @@ public abstract class IGPostRequest<T extends IGResponse> extends IGRequest<T> {
     @Override
     public Request formRequest(IGClient client) {
         Request.Builder req = new Request.Builder().url(this.formUrl(client));
+
         this.applyHeaders(client, req);
         req.post(this.getRequestBody(client));
 
@@ -38,10 +39,10 @@ public abstract class IGPostRequest<T extends IGResponse> extends IGRequest<T> {
                 : getPayload(client));
         log.debug("Payload : {}", payload);
         if (isSigned()) {
-            return RequestBody.create(IGUtils.generateSignature(payload),
-                    MediaType.parse("application/x-www-form-urlencoded; charset=UTF-8"));
+            return RequestBody.create(
+                    MediaType.parse("application/x-www-form-urlencoded; charset=UTF-8"), IGUtils.generateSignature(payload));
         } else {
-            return RequestBody.create(payload, MediaType.parse("application/json; charset=UTF-8"));
+            return RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), payload);
         }
     }
 

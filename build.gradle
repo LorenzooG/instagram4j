@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
     id 'com.jfrog.bintray' version '1.8.5'
     id 'net.nemerosa.versioning' version '2.8.2'
+    id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
 group = 'com.github.instagram4j'
@@ -14,8 +15,8 @@ archivesBaseName = 'instagram4j'
 version = "${versioning.info.branchType.equals('release') ? versioning.info.display : versioning.info.full}"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 repositories {
@@ -24,15 +25,17 @@ repositories {
 
 dependencies {
     // OkHttp
-    api 'com.squareup.okhttp3:okhttp:4.7.2'
-    api 'com.squareup.okhttp3:okhttp-urlconnection:4.7.2'
+    api 'com.squareup.okhttp3:okhttp:4.10.0-rc1'
+    api 'com.squareup.okhttp3:okhttp-urlconnection:4.10.0-RC1'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0-rc1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.10.0-RC1'
     // jackson data-bind
     api 'com.fasterxml.jackson.core:jackson-databind:2.11.0'
     api 'com.fasterxml.jackson.core:jackson-annotations:2.11.0'
     api 'org.slf4j:slf4j-api:1.7.30'
     // Test utilities
     testImplementation 'org.slf4j:slf4j-log4j12:1.7.30'
-    testImplementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
+    testImplementation 'com.squareup.okhttp3:logging-interceptor:4.10.0-RC1'
     testImplementation 'log4j:log4j:1.2.17'
     testImplementation 'junit:junit:4.12'
     testImplementation 'pl.pragmatists:JUnitParams:1.1.1'

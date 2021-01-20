@@ -19,6 +19,9 @@ import java.util.UUID;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -212,7 +215,12 @@ public class IGUtils {
     }
 
     public static OkHttpClient.Builder defaultHttpClientBuilder() {
-        return new OkHttpClient.Builder().cookieJar(new JavaNetCookieJar(new CookieManager()));
+        return new OkHttpClient.Builder().hostnameVerifier(new HostnameVerifier() {
+            @Override
+            public boolean verify(String hostname, SSLSession session) {
+                return true;
+            }
+        }).cookieJar(new JavaNetCookieJar(new CookieManager()));
     }
 
     public static String randomUuid() {

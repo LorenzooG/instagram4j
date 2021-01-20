@@ -80,7 +80,6 @@ public abstract class IGRequest<T extends IGResponse> {
     }
 
     public <U> U parseResponse(String json, Class<U> type) throws JsonProcessingException {
-        log.debug("{} parsing response : {}", apiPath() + path(), json);
         U response = IGUtils.jsonToObject(json, type);
 
         return response;

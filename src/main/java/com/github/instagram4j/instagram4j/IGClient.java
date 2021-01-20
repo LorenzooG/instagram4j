@@ -121,7 +121,6 @@ public class IGClient implements Serializable {
 
     public <T extends IGResponse> CompletableFuture<T> sendRequest(@NonNull IGRequest<T> req) {
         CompletableFuture<Pair<Response, String>> responseFuture = new CompletableFuture<>();
-        log.info("Sending request : {}", req.formUrl(this).toString());
         this.httpClient.newCall(req.formRequest(this)).enqueue(new Callback() {
 
             @Override
@@ -131,7 +130,6 @@ public class IGClient implements Serializable {
 
             @Override
             public void onResponse(Call call, Response res) throws IOException {
-                log.info("Response for {} : {}", call.request().url().toString(), res.code());
                 try (ResponseBody body = res.body()) {
                     responseFuture.complete(new Pair<>(res, body.string()));
                 }
@@ -142,9 +140,7 @@ public class IGClient implements Serializable {
         return responseFuture
                 .thenApply(res -> {
                     setFromResponseHeaders(res.getFirst());
-                    log.info("Response for {} with body (truncated) : {}",
-                            res.getFirst().request().url(),
-                            IGUtils.truncate(res.getSecond()));
+
 
                     return req.parseResponse(res);
                 })
