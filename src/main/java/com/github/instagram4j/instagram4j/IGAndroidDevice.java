@@ -38,20 +38,19 @@ public class IGAndroidDevice extends IGDevice implements Serializable {
 
     public static final IGAndroidDevice[] GOOD_DEVICES = {
             /*
+             * OnePlus 3T. Released: November 2016.
+             * https://www.amazon.com/OnePlus-A3010-64GB-Gunmetal-International/dp/ B01N4H00V8
+             * https://www.handsetdetection.com/properties/devices/OnePlus/A3010
+             */
+            new IGAndroidDevice("24/7.0; 380dpi; 1080x1920; OnePlus; ONEPLUS A3010; OnePlus3T; qcom"),
+
+            /*
              * Samsung Galaxy S7 Edge SM-G935F. Released: March 2016.
              * https://www.amazon.com/Samsung-SM-G935F-Factory-Unlocked-Smartphone/dp/ B01C5OIINO
              * https://www.handsetdetection.com/properties/devices/Samsung/SM-G935F
              */
             new IGAndroidDevice(
                     "23/6.0.1; 640dpi; 1440x2560; samsung; SM-G935F; hero2lte; samsungexynos8890"),
-
-            /*
-             * OnePlus 3T. Released: November 2016.
-             * https://www.amazon.com/OnePlus-A3010-64GB-Gunmetal-International/dp/ B01N4H00V8
-             * https://www.handsetdetection.com/properties/devices/OnePlus/A3010
-             */
-            new IGAndroidDevice(
-                    "24/7.0; 380dpi; 1080x1920; OnePlus; ONEPLUS A3010; OnePlus3T; qcom"),
 
             /*
              * LG G5. Released: April 2016.
